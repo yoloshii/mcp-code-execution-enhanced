@@ -269,7 +269,7 @@ Time: ~2 minutes
 - **`runtime/harness.py`**: Dual-mode script execution (direct/sandbox)
 - **`runtime/generate_wrappers.py`**: Auto-generate typed wrappers from MCP schemas
 - **`runtime/sandbox/`**: Container sandboxing with security controls
-- **`skills/`**: 8 CLI-based immutable workflow templates
+- **`skills/`**: Skills framework with 2 generic examples (CLI-based template pattern)
 
 ---
 
