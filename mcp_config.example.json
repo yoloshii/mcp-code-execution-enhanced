@@ -1,0 +1,68 @@
+{
+  "mcpServers": {
+    "git": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["mcp-server-git", "--repository", "."],
+      "disabled": false
+    },
+    "fetch": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["mcp-server-fetch"],
+      "disabled": false
+    },
+    "perplexity": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@perplexity-ai/mcp-server"],
+      "env": {
+        "PERPLEXITY_API_KEY": "your-perplexity-api-key-here",
+        "PERPLEXITY_TIMEOUT_MS": "60000"
+      },
+      "disabled": false
+    },
+    "jina": {
+      "type": "sse",
+      "url": "https://mcp.jina.ai/sse",
+      "headers": {
+        "Authorization": "Bearer your-jina-api-key-here"
+      },
+      "disabled": false
+    },
+    "exa": {
+      "type": "http",
+      "url": "https://mcp.exa.ai/mcp",
+      "headers": {
+        "x-api-key": "your-exa-api-key-here"
+      },
+      "disabled": false
+    }
+  },
+  "sandbox": {
+    "enabled": false,
+    "runtime": "auto",
+    "image": "python:3.11-slim",
+    "memory_limit": "512m",
+    "timeout": 30
+  },
+  "_comments": {
+    "transports": {
+      "stdio": "Subprocess-based servers (most common). Requires command + args.",
+      "sse": "Server-Sent Events. Requires url + optional headers.",
+      "http": "Streamable HTTP. Requires url + optional headers."
+    },
+    "sandbox": {
+      "enabled": "Set to true to run all scripts in isolated container",
+      "runtime": "auto (detect podman/docker), podman, docker",
+      "image": "Container image (default: python:3.11-slim)",
+      "memory_limit": "RAM limit (default: 512m)",
+      "timeout": "Max execution time in seconds (default: 30)"
+    },
+    "fields": {
+      "disabled": "Set to true to skip this server during wrapper generation",
+      "env": "Environment variables (stdio only)",
+      "headers": "HTTP headers (SSE/HTTP only)"
+    }
+  }
+}

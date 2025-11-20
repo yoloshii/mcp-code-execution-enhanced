@@ -1,0 +1,151 @@
+# AGENTS.md Template
+
+> **Note:** This is a template for adapting this project to other AI frameworks.
+>
+> **If using Claude Code:** See `CLAUDE.md` instead - it's optimized for Claude Code's operational intelligence.
+>
+> **If using another AI framework:** Copy this template to `AGENTS.md` and customize for your agent's capabilities.
+
+---
+
+## Adapting for Your AI Framework
+
+### Skills Framework Limitations
+
+The Skills framework (99.6% token reduction) is optimized for Claude Code's capabilities:
+- Filesystem discovery (`ls ./skills/`)
+- CLI argument parsing from docstrings
+- USAGE section interpretation
+- Immutable template execution
+
+**For other AI agents:**
+- ⚠️ May not achieve 99.6% efficiency
+- ⚠️ May need explicit instructions for skill discovery
+- ⚠️ May not understand CLI argument pattern
+- ⚠️ Consider using script writing approach (98.7% reduction) instead
+
+### Core Runtime (Works with Any Agent)
+
+The following features work with any AI framework:
+
+**Script Writing (98.7% reduction):**
+1. Agent explores `./servers/` to discover tools
+2. Agent writes Python script using tool imports
+3. Script executes via harness
+4. Agent processes results
+
+**Example workflow:**
+```python
+# Your agent can write scripts like this
+import asyncio
+from runtime.mcp_client import call_mcp_tool
+
+async def main():
+    result = await call_mcp_tool("server__tool", params)
+    return result
+
+asyncio.run(main())
+```
+
+### Customization Guide
+
+1. **Copy this template** to `AGENTS.md`
+2. **Remove Skills references** if your agent doesn't support the pattern
+3. **Add framework-specific instructions** for:
+   - Tool discovery approach
+   - Script generation patterns
+   - Execution workflow
+4. **Document limitations** specific to your framework
+5. **Provide examples** that work with your agent
+
+---
+
+## Alternative: Script-Based Approach
+
+If your AI framework doesn't support the Skills pattern, focus on the script writing approach:
+
+### Pattern
+
+1. **Explore servers**: `ls ./servers/` or use generate_wrappers
+2. **Read tool docs**: `cat servers/{server}/{tool}.py`
+3. **Write script**: Create custom Python script
+4. **Execute**: `uv run python -m runtime.harness workspace/script.py`
+
+### Example AGENTS.md for Script-Based Frameworks
+
+```markdown
+# AGENTS.md
+
+**MCP Script Execution**: Progressive disclosure pattern (98.7% token reduction)
+
+## Workflow
+
+1. Configure MCP servers in mcp_config.json
+2. Generate wrappers: `uv run mcp-generate`
+3. Explore tools: `ls servers/`
+4. Write script using tool imports
+5. Execute: `uv run python -m runtime.harness workspace/script.py`
+
+## Script Pattern
+
+```python
+from servers.name import tool_name, ToolNameParams
+
+async def main():
+    result = await tool_name(ToolNameParams(...))
+    return result
+```
+
+See `examples/` for script examples.
+```
+
+---
+
+## Multi-Transport Support (Universal)
+
+All AI frameworks can use multi-transport configuration:
+
+```json
+{
+  "mcpServers": {
+    "stdio-server": {"type": "stdio", "command": "...", "args": [...]},
+    "sse-server": {"type": "sse", "url": "...", "headers": {...}},
+    "http-server": {"type": "http", "url": "...", "headers": {...}}
+  }
+}
+```
+
+This works regardless of whether you use Skills or scripts.
+
+---
+
+## Sandbox Support (Universal)
+
+Container sandboxing works with any AI framework:
+
+```bash
+# Enable via flag
+uv run python -m runtime.harness workspace/script.py --sandbox
+
+# Or via config
+{"sandbox": {"enabled": true}}
+```
+
+---
+
+## Summary for Framework Developers
+
+**What works everywhere:**
+- ✅ Multi-transport MCP support
+- ✅ Script writing approach (98.7%)
+- ✅ Container sandboxing
+- ✅ Type-safe wrappers
+- ✅ Progressive disclosure
+
+**What requires Claude Code:**
+- ⚠️ Skills framework (99.6%)
+- ⚠️ Filesystem-based skill discovery
+- ⚠️ CLI argument interpretation
+- ⚠️ USAGE section parsing
+
+**Recommendation:** Use script writing approach for non-Claude Code frameworks.

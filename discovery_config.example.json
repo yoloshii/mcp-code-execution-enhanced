@@ -1,0 +1,57 @@
+{
+  "servers": {
+    "git": {
+      "safeTools": {
+        "git_status": {
+          "repo_path": "."
+        },
+        "git_diff_unstaged": {
+          "repo_path": ".",
+          "context_lines": 3
+        },
+        "git_diff_staged": {
+          "repo_path": ".",
+          "context_lines": 3
+        },
+        "git_diff": {
+          "repo_path": ".",
+          "target": "master"
+        },
+        "git_log": {
+          "repo_path": ".",
+          "max_count": 10
+        },
+        "git_show": {
+          "repo_path": ".",
+          "revision": "HEAD"
+        },
+        "git_branch": {
+          "repo_path": ".",
+          "branch_type": "all"
+        }
+      }
+    },
+    "fetch": {
+      "safeTools": {
+        "fetch": {
+          "url": "https://example.com"
+        }
+      }
+    }
+  },
+  "metadata": {
+    "generated": true,
+    "tools_skipped": {
+      "dangerous": [],
+      "unknown": [
+        "git_commit",
+        "git_add",
+        "git_reset",
+        "git_create_branch",
+        "git_checkout"
+      ]
+    },
+    "generated_count": 8,
+    "skipped_count": 5
+  }
+}
