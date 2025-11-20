@@ -320,11 +320,6 @@ If using with other AI agents:
 - [MCP Integration](https://docs.claude.com/en/docs/claude-code/mcp)
 - [Progressive Disclosure](https://www.anthropic.com/engineering/code-execution-with-mcp)
 
-### Community
-
-- [Claude Code GitHub](https://github.com/anthropics/claude-code)
-- [Anthropic Discord](https://discord.gg/anthropic)
-
 ---
 
 ## 🎯 Recommendations
