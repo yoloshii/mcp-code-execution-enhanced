@@ -87,7 +87,7 @@ if __name__ == "__main__":
 
 1. **Discover:** `ls ./skills/` → see available workflows
 2. **Read:** `cat ./skills/your_skill.py` → understand CLI arguments
-3. **Execute:** Run with parameters (IMMUTABLE - don't edit file)
+3. **Execute:** Run with parameters (don't edit to change parameters)
 
 ```bash
 uv run python -m runtime.harness skills/your_skill.py \
@@ -97,7 +97,8 @@ uv run python -m runtime.harness skills/your_skill.py \
 
 ### Key Principles
 
-- **Immutability**: Skills are templates, never edit the file
+- **Parameter Immutability**: Change parameters via CLI args, not by editing files
+- **Logic Mutability**: Edit skills freely to fix bugs or improve logic
 - **CLI Parameters**: All configuration via command-line arguments
 - **Reusability**: Write once, use many times with different args
 - **Documentation**: Every skill has USAGE section
@@ -212,18 +213,19 @@ See `../examples/skills/` for 8 advanced workflow examples demonstrating:
 **Skills Framework Benefits:**
 - **99.6% token reduction** vs traditional approach (27,300 → 110 tokens)
 - **96% time reduction** vs writing scripts (2 min → 5 sec)
-- **Immutable templates** mean no file editing
+- **CLI parameters** mean no file editing for parameter changes
 - **Reusable workflows** across different queries
+- **Edit-friendly** for bug fixes and logic improvements
 
 ---
 
 ## 🔑 Key Concepts
 
-### Immutability
-Skills are templates that never change. All customization via CLI arguments.
+### Parameter Immutability
+Change parameters via CLI arguments, not by editing files. Edit skills freely to fix bugs or improve logic.
 
 ### CLI-Based
-No file editing. Execute with `--param1 value --param2 value`.
+Parameter changes via CLI arguments. Execute with `--param1 value --param2 value`.
 
 ### Discoverable
 Agents find skills via filesystem (`ls ./skills/`).
