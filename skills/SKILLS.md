@@ -7,8 +7,9 @@
 ## Philosophy
 
 **DON'T:** Write scripts from scratch each time
-**DON'T:** Edit skill files
+**DON'T:** Edit skill files to change parameters (use CLI args instead)
 **DO:** Discover and execute skills with CLI arguments
+**DO:** Edit skill files to fix bugs or improve logic
 
 **Pattern:**
 ```
@@ -23,7 +24,7 @@ Discover (ls) → Read (cat) → Execute with CLI args (--query, --num-urls, etc
 **For complex workflows (>2 tools, logic, processing):**
 1. `ls ./skills/` - Discover available skills
 2. `cat ./skills/{skill}.py` - Read skill documentation and CLI arguments
-3. Execute with CLI args (IMMUTABLE - do NOT edit file):
+3. Execute with CLI args (do NOT edit to change parameters):
    ```bash
    uv run python -m runtime.harness skills/simple_fetch.py \
        --url "https://example.com"
@@ -37,17 +38,19 @@ Discover (ls) → Read (cat) → Execute with CLI args (--query, --num-urls, etc
 
 ## Efficiency Benefits
 
-**Token savings:**
+**Token savings (for parameter changes):**
 - ❌ Writing from scratch: Load schemas + write code = ~5,000 tokens
-- ❌ Editing skill file: Read skill + edit + write = ~800 tokens
-- ✅ CLI execution: Read skill + command = ~110 tokens
+- ❌ Editing skill to change parameters: Read skill + edit + write = ~800 tokens
+- ✅ CLI execution with different args: Read skill + command = ~110 tokens
 - **Reduction: 98% (CLI approach)**
 
-**Time savings:**
+**Time savings (for parameter changes):**
 - ❌ Writing from scratch: ~2 min
-- ❌ Editing skill: ~30 sec
-- ✅ CLI execution: ~5 sec
+- ❌ Editing skill to change parameters: ~30 sec
+- ✅ CLI execution with different args: ~5 sec
 - **Reduction: 96% (CLI approach)**
+
+**Note:** Edit skills freely to fix bugs, improve logic, or add features. The efficiency benefit is about avoiding file edits for parameter changes.
 
 ## Skill Template (CLI-Based)
 
@@ -134,10 +137,10 @@ if __name__ == "__main__":
 
 **Skills (PREFERRED):**
 - ✅ Reusable workflow templates
-- ✅ IMMUTABLE (no file editing)
-- ✅ CLI arguments for flexibility
+- ✅ CLI arguments for parameter changes (no file edits needed)
+- ✅ Edit-friendly for bug fixes and improvements
 - ✅ Pre-tested and documented
-- ✅ 110 tokens per use
+- ✅ 110 tokens per use (when using CLI args)
 - ✅ 5 seconds execution time
 - ✅ Agent just reads and executes
 
@@ -164,12 +167,13 @@ uv run python -m runtime.harness skills/multi_tool_pipeline.py \
 
 ## Key Principles
 
-1. **Immutability** - Skills are templates, never edit the file
-2. **CLI Parameters** - All configuration via command-line arguments
-3. **Reusability** - Write once, use many times with different args
-4. **Documentation** - Every skill has USAGE section with example
-5. **Type Safety** - argparse provides validation and help text
-6. **Efficiency** - 98% token reduction, 96% time reduction vs writing scripts
+1. **Parameter Immutability** - Change parameters via CLI args, not by editing the file
+2. **Logic Mutability** - Edit skills freely to fix bugs, improve logic, or add features
+3. **CLI Parameters** - All configuration via command-line arguments
+4. **Reusability** - Write once, use many times with different args
+5. **Documentation** - Every skill has USAGE section with example
+6. **Type Safety** - argparse provides validation and help text
+7. **Efficiency** - 98% token reduction for parameter changes via CLI vs file edits
 
 ## Help Text
 
@@ -190,4 +194,4 @@ optional arguments:
 
 ---
 
-**Remember:** Skills are IMMUTABLE. Pass parameters via CLI, never edit files!
+**Remember:** Pass parameters via CLI args, not by editing files. Edit skills freely to fix bugs or improve logic!

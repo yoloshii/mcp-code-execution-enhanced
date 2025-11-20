@@ -1,6 +1,6 @@
 # CLAUDE.md - Claude Code Operational Guide
 
-**Dual-Mode MCP pattern**: Skills framework (PREFERRED, 99.6% reduction) for reusable workflows, direct script writing (98.7% reduction) for novel tasks. Progressive disclosure via filesystem tool discovery. CLI-based immutable pattern. Multi-transport support (stdio + SSE + HTTP).
+**Dual-Mode MCP pattern**: Skills framework (PREFERRED, 99.6% reduction) for reusable workflows, direct script writing (98.7% reduction) for novel tasks. Progressive disclosure via filesystem tool discovery. CLI-based parameter pattern (edit logic freely, change parameters via CLI). Multi-transport support (stdio + SSE + HTTP).
 
 ## Execution Modes
 
@@ -81,7 +81,7 @@ servers/<serverName>/__init__.py           # Barrel exports
 servers/<serverName>/discovered_types.py   # Optional: Pydantic types from actual API responses
 ```
 
-`skills/` (CLI-based immutable templates):
+`skills/` (CLI-based parameter templates - edit logic freely):
 ```
 skills/<skill_name>.py                     # Workflow with argparse, USAGE docstring
 skills/README.md                           # Skills documentation
@@ -128,7 +128,7 @@ skills/SKILLS.md                           # Complete system guide
 1. Discover: `ls skills/` → see available skill examples
 2. Read: `cat skills/simple_fetch.py` → see CLI arguments and USAGE
 3. Execute: `uv run python -m runtime.harness skills/simple_fetch.py --url "https://example.com"`
-4. Skills are IMMUTABLE - parameters via CLI only, never edit files
+4. Change parameters via CLI args - edit skills freely to fix bugs or improve logic
 5. Create your own skills for your specific workflows using the template
 
 ### Script-Based (ALTERNATIVE)
@@ -151,7 +151,7 @@ result = await tool_name(params)  # Pydantic model
 ```
 
 ## Key Details
-- **Skills are IMMUTABLE** - Parameters via CLI only, never edit files
+- **Skills pattern** - Change parameters via CLI args, edit skills freely to fix bugs or improve logic
 - Tool ID: `"serverName__toolName"` (double underscore)
 - Progressive disclosure: Skills (110 tokens, 99.6% reduction) or Scripts (2K tokens, 98.7% reduction)
 - Multi-transport: stdio (subprocess), SSE (events), HTTP (streamable)
