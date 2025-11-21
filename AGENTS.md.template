@@ -10,17 +10,17 @@
 
 ## Adapting for Your AI Framework
 
-### Skills Framework Limitations
+### Scripts with CLI Args Pattern
 
-The Skills framework (99.6% token reduction) is optimized for Claude Code's capabilities:
-- Filesystem discovery (`ls ./skills/`)
+The CLI-based scripts pattern (99.6% token reduction) is optimized for Claude Code's capabilities:
+- Filesystem discovery (`ls ./scripts/`)
 - CLI argument parsing from docstrings
 - USAGE section interpretation
 - Immutable template execution
 
 **For other AI agents:**
 - ⚠️ May not achieve 99.6% efficiency
-- ⚠️ May need explicit instructions for skill discovery
+- ⚠️ May need explicit instructions for script discovery
 - ⚠️ May not understand CLI argument pattern
 - ⚠️ Consider using script writing approach (98.7% reduction) instead
 
@@ -50,7 +50,7 @@ asyncio.run(main())
 ### Customization Guide
 
 1. **Copy this template** to `AGENTS.md`
-2. **Remove Skills references** if your agent doesn't support the pattern
+2. **Remove Scripts CLI pattern references** if your agent doesn't support it
 3. **Add framework-specific instructions** for:
    - Tool discovery approach
    - Script generation patterns
@@ -60,9 +60,9 @@ asyncio.run(main())
 
 ---
 
-## Alternative: Script-Based Approach
+## Alternative: Script Writing Approach
 
-If your AI framework doesn't support the Skills pattern, focus on the script writing approach:
+If your AI framework doesn't support the CLI-based scripts pattern, focus on the script writing approach:
 
 ### Pattern
 
@@ -142,10 +142,11 @@ uv run python -m runtime.harness workspace/script.py --sandbox
 - ✅ Type-safe wrappers
 - ✅ Progressive disclosure
 
-**What requires Claude Code:**
-- ⚠️ Skills framework (99.6%)
-- ⚠️ Filesystem-based skill discovery
-- ⚠️ CLI argument interpretation
+**What requires Claude Code (or similar capabilities):**
+- ⚠️ Scripts with CLI args pattern (99.6%)
+- ⚠️ Filesystem-based script discovery
+- ⚠️ CLI argument interpretation from docstrings
 - ⚠️ USAGE section parsing
+- ⚠️ Claude Code Skills (.claude/skills/) - Native auto-discovery
 
 **Recommendation:** Use script writing approach for non-Claude Code frameworks.
