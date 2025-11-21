@@ -64,7 +64,7 @@ dmypy.json
 # Project-specific
 servers/          # Generated wrappers (regenerate with mcp-generate)
 workspace/        # User scripts (gitignored for privacy)
-mcp_config.local.json  # For local overrides with real API keys
+mcp_config.json   # User creates from mcp_config.example.json
 discovery_config.json  # May contain sensitive test data
 
 # Logs and temporary files

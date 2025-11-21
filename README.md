@@ -200,18 +200,18 @@ uv sync
 uv run python -c "from runtime.mcp_client import get_mcp_client_manager; print('✓ Installation successful')"
 ```
 
-### Step 3: Review MCP Configuration
+### Step 3: Create MCP Configuration
 
 > **Important for Claude Code Users:** This project uses its own `mcp_config.json` for MCP server configuration, **separate** from Claude Code's global configuration (`~/.claude.json`). To avoid conflicts, use different servers in each configuration or disable overlapping servers in `~/.claude.json` while using this project.
 
-**The repository includes a working `mcp_config.json`** with the servers needed for the example scripts:
+**Create `mcp_config.json` from the example:**
 
 ```bash
-# View current configuration
-cat mcp_config.json
+# Copy example config (includes git + fetch for examples)
+cp mcp_config.example.json mcp_config.json
 ```
 
-**Configuration included:**
+**This config works out of the box:**
 
 ```json
 {
