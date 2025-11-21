@@ -1,1 +1,1 @@
-../../scripts/simple_fetch.py
+../../../scripts/simple_fetch.py

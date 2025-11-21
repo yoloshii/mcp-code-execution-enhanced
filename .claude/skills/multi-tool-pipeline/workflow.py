@@ -1,1 +1,1 @@
-../../scripts/multi_tool_pipeline.py
+../../../scripts/multi_tool_pipeline.py
