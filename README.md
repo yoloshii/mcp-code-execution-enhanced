@@ -200,21 +200,18 @@ uv sync
 uv run python -c "from runtime.mcp_client import get_mcp_client_manager; print('✓ Installation successful')"
 ```
 
-### Step 3: Configure MCP Servers
+### Step 3: Review MCP Configuration
 
 > **Important for Claude Code Users:** This project uses its own `mcp_config.json` for MCP server configuration, **separate** from Claude Code's global configuration (`~/.claude.json`). To avoid conflicts, use different servers in each configuration or disable overlapping servers in `~/.claude.json` while using this project.
 
-**Create `mcp_config.json` in the project root:**
+**The repository includes a working `mcp_config.json`** with the servers needed for the example scripts:
 
 ```bash
-# Copy example config
-cp mcp_config.example.json mcp_config.json
-
-# Edit with your servers and API keys
-# Example servers shown below
+# View current configuration
+cat mcp_config.json
 ```
 
-**Basic configuration example:**
+**Configuration included:**
 
 ```json
 {
@@ -236,7 +233,7 @@ cp mcp_config.example.json mcp_config.json
 }
 ```
 
-**See `mcp_config.example.json` for more transport types (stdio, SSE, HTTP).**
+**To add more servers:** Edit `mcp_config.json` and add your own MCP servers. See `docs/TRANSPORTS.md` for examples of stdio, SSE, and HTTP transports.
 
 ### Step 4: Generate Tool Wrappers
 

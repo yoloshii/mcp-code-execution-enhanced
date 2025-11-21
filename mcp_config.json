@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "git": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["mcp-server-git", "--repository", "."]
+    },
+    "fetch": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["mcp-server-fetch"]
+    }
+  },
+  "sandbox": {
+    "enabled": false,
+    "runtime": "auto",
+    "image": "python:3.11-slim"
+  }
+}
