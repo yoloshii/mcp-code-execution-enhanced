@@ -7,7 +7,7 @@ Thank you for considering contributing! This project welcomes contributions from
 We're particularly interested in contributions in these areas:
 
 ### 1. Skills Library
-- Add new workflow templates to `skills/`
+- Add new workflow templates to `scripts/`
 - Document CLI arguments clearly
 - Follow the immutable template pattern
 - Include USAGE section with examples
@@ -200,7 +200,7 @@ CLI ARGUMENTS:
     --param2    Description (default: value)
 
 USAGE:
-    uv run python -m runtime.harness skills/skill_name.py \
+    uv run python -m runtime.harness scripts/skill_name.py \
         --param1 "value" \
         --param2 123
 """
@@ -246,7 +246,7 @@ Pull requests will be reviewed for:
 
 - Read `AGENTS.md` for quick operational guide
 - Review `docs/ARCHITECTURE.md` for system design
-- Study existing skills in `skills/` directory
+- Study existing skills in `scripts/` directory
 - Check `examples/` for usage patterns
 - Review tests in `tests/` for implementation details
 

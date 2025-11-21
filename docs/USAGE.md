@@ -10,7 +10,7 @@
 ### 1. Install Dependencies
 
 ```bash
-cd /home/khitomer/Projects/mcp-code-execution
+cd /home/khitomer/Projects/mcp-code-execution-enhanced
 
 # Sync environment
 uv sync
@@ -41,19 +41,19 @@ cat servers/jina/search_web.py
 
 ### 4. Choose Your Approach
 
-#### Option A: Skills (PREFERRED - 99.6% token reduction)
+#### Option A: Scripts (PREFERRED - 99.6% token reduction)
 
 For multi-step workflows, use pre-written skills:
 
 ```bash
 # Discover available skills
-ls skills/
+ls scripts/
 
 # Read skill documentation
-cat skills/simple_fetch.py
+cat scripts/simple_fetch.py
 
 # Execute with CLI arguments (IMMUTABLE - don't edit file)
-uv run python -m runtime.harness skills/simple_fetch.py \
+uv run python -m runtime.harness scripts/simple_fetch.py \
     --url "https://example.com"
 ```
 
@@ -61,7 +61,7 @@ uv run python -m runtime.harness skills/simple_fetch.py \
 - `simple_fetch.py` - Basic single-tool execution
 - `multi_tool_pipeline.py` - Multi-tool chaining pattern
 
-See `skills/README.md` for complete documentation.
+See `scripts/README.md` for complete documentation.
 
 **Benefits:** 99.6% token reduction, 96% time reduction, battle-tested workflows.
 

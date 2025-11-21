@@ -30,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Dual-mode execution (direct/sandbox)
 
 - **Enhanced Documentation**:
-  - Skills system guide (`skills/SKILLS.md`, `skills/README.md`)
+  - Skills system guide (`scripts/SKILLS.md`, `scripts/README.md`)
   - Transport-specific guide (`docs/TRANSPORTS.md`)
   - Architecture documentation (`docs/ARCHITECTURE.md`)
   - Usage guide (`docs/USAGE.md`)

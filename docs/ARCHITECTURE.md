@@ -11,7 +11,7 @@
 This runtime implements Anthropic's PRIMARY "Code Execution with MCP" pattern, enhanced with a Skills system achieving **99.6% token reduction** through CLI-based immutable workflow templates. Filesystem-based progressive disclosure for tool discovery. Optional container sandboxing for production security.
 
 **Key Features:**
-- **Skills library**: 8 CLI-based immutable workflow templates (99.6% token reduction)
+- **Scripts library**: 8 CLI-based immutable workflow templates (99.6% token reduction)
 - **Filesystem discovery**: Anthropic's recommended approach (98.7% token reduction for scripts)
 - **Multi-transport support**: stdio, SSE, and HTTP
 - **Optional container sandboxing**: Rootless isolation with security controls

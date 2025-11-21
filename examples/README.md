@@ -4,7 +4,7 @@ This directory contains example scripts demonstrating different patterns for usi
 
 ## ⭐ Recommended: Skills-Based Execution
 
-**For most workflows**, use pre-written skills from `../skills/` directory instead of writing scripts from scratch.
+**For most workflows**, use pre-written skills from `../scripts/` directory instead of writing scripts from scratch.
 
 **Why Skills?**
 - ✅ 99.6% token reduction (110 tokens vs 2,000 for script writing)
@@ -17,11 +17,11 @@ This directory contains example scripts demonstrating different patterns for usi
 ```bash
 # Instead of writing a custom research script
 cd /home/khitomer/Projects/mcp-code-execution
-uv run python -m runtime.harness skills/simple_fetch.py \
+uv run python -m runtime.harness scripts/simple_fetch.py \
     --url "https://example.com"
 ```
 
-**Available skills:** See `../skills/README.md` for complete list (8 workflows).
+**Available skills:** See `../scripts/README.md` for complete list (8 workflows).
 
 **When to use these example scripts:**
 - ⚠️ Novel workflows not covered by skills

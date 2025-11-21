@@ -58,7 +58,7 @@ This project uses **separate MCP configuration** from Claude Code's global setti
 
 If both configurations have a server named "git":
 - Claude Code uses its version during conversation
-- This project uses its version when running skills/scripts
+- This project uses its version when running scripts/scripts
 - Can cause confusion about which server is being used
 
 ### Solution Options

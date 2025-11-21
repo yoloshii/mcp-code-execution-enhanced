@@ -1,13 +1,12 @@
 # MCP Code Execution - Enhanced Edition
 
-**99.6% Token Reduction** through Skills-based CLI execution and progressive tool discovery for Model Context Protocol (MCP) servers.
+**99.6% Token Reduction** through CLI-based scripts and progressive tool discovery for Model Context Protocol (MCP) servers.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Optimized-5436DA.svg)](https://docs.claude.com/en/docs/claude-code)
-[![Skills Framework](https://img.shields.io/badge/Skills-Framework-blue.svg)](./skills/SKILLS.md)
 
-> **Note:** This project is optimized for [Claude Code](https://docs.claude.com/en/docs/claude-code) with native Skills framework support. While the core runtime works with any AI agent, the Skills framework (99.6% token reduction) is designed for Claude Code's operational intelligence.
+> **Note:** This project is optimized for [Claude Code](https://docs.claude.com/en/docs/claude-code) with native Skills support. The core runtime works with any AI agent. Scripts with CLI arguments achieve 99.6% token reduction.
 
 ---
 
@@ -15,7 +14,7 @@
 
 An **enhanced implementation** of Anthropic's [Code Execution with MCP](https://www.anthropic.com/engineering/code-execution-with-mcp) pattern, **optimized for Claude Code**, combining the best ideas from the MCP community and adding significant improvements:
 
-- **Skills Framework**: Pattern for creating reusable CLI-based workflows (99.6% token reduction) - **Claude Code optimized**
+- **Scripts with CLI Args**: Reusable Python workflows with command-line parameters (99.6% token reduction)
 - **Multi-Transport**: Full support for stdio, SSE, and HTTP MCP servers
 - **Container Sandboxing**: Optional rootless isolation with security controls
 - **Type Safety**: Pydantic models throughout with full validation
@@ -23,13 +22,22 @@ An **enhanced implementation** of Anthropic's [Code Execution with MCP](https://
 
 ### 🤖 Claude Code Integration
 
-The **Skills framework** is designed to work with [Claude Code's](https://docs.claude.com/en/docs/claude-code) operational intelligence:
-- Agents discover skills via filesystem (`ls ./skills/`)
-- Skills use CLI arguments (immutable templates)
-- Compatible with Claude Code's agent workflow
-- Supports Claude Code's progressive disclosure pattern
+**Native Skills Support:** This project includes proper [Claude Code Skills](https://docs.claude.com/en/docs/agents-and-tools/agent-skills) integration:
 
-**Note:** Core runtime (script writing, 98.7% reduction) works with any AI agent. Skills framework (99.6% reduction) is Claude Code optimized.
+- **`.claude/skills/`** - Skills in Claude Code's native format (SKILL.md + workflow.py)
+- **Auto-discovery** - Claude Code automatically finds and validates Skills
+- **2 Generic Examples** - simple-fetch, multi-tool-pipeline (templates for custom workflows)
+- **Format Compliant** - YAML frontmatter, validation rules, progressive disclosure
+
+**Dual-layer architecture:**
+- **Layer 1**: Claude Code Skills (`.claude/skills/`) - Native discovery and format
+- **Layer 2**: Scripts (`./scripts/`) - CLI-based Python workflows with argparse
+
+**Token efficiency:**
+- Core runtime: 98.7% reduction (Anthropic's filesystem pattern)
+- Scripts with CLI args: 99.6% reduction (no file editing needed)
+
+**Note:** Scripts work with any AI agent. Claude Code Skills provide native auto-discovery for Claude Code users.
 
 ---
 
@@ -48,36 +56,65 @@ This project builds upon and merges ideas from:
    - Comprehensive security controls
    - Production deployment patterns
 
-**Our contribution:** Merged the best of both, added Skills system with CLI-based execution, implemented multi-transport support, and refined the architecture for maximum efficiency.
+**Our contribution:** Merged the best of both, added CLI-based scripts pattern, implemented multi-transport support, and refined the architecture for maximum efficiency.
 
 ---
 
 ## ✨ Key Enhancements
 
-### 1. Skills Framework (NEW - 99.6% Token Reduction)
+### 1. Claude Code Skills Integration (NEW)
 
-**A pattern for creating reusable CLI-based workflow templates** that agents execute with arguments:
+**Native Skills format** in `.claude/skills/` directory:
+
+```
+.claude/skills/
+├── simple-fetch/
+│   ├── SKILL.md        # YAML frontmatter + markdown instructions
+│   └── workflow.py     # → symlink to ../../scripts/simple_fetch.py
+└── multi-tool-pipeline/
+    ├── SKILL.md        # Multi-tool orchestration example
+    └── workflow.py     # → symlink to ../../scripts/multi_tool_pipeline.py
+```
+
+**How it works:**
+1. Claude Code auto-discovers Skills in `.claude/skills/`
+2. Reads SKILL.md (follows Claude Code's format spec)
+3. Executes workflow.py (which is a script) with CLI arguments
+4. Returns results
+
+**Benefits:**
+- ✅ Native Claude Code discovery
+- ✅ Standard SKILL.md format (YAML + markdown)
+- ✅ Validation compliant (name, description rules)
+- ✅ Progressive disclosure compatible
+- ✅ Generic examples as templates
+
+**Documentation:** See `.claude/skills/README.md` for details
+
+### 2. Scripts with CLI Arguments (99.6% Token Reduction)
+
+**CLI-based Python workflows** that agents execute with parameters:
 
 ```bash
-# Simple example (generic)
-uv run python -m runtime.harness skills/simple_fetch.py \
+# Simple example (generic template)
+uv run python -m runtime.harness scripts/simple_fetch.py \
     --url "https://example.com"
 
-# Pipeline example (generic)
-uv run python -m runtime.harness skills/multi_tool_pipeline.py \
+# Pipeline example (generic template)
+uv run python -m runtime.harness scripts/multi_tool_pipeline.py \
     --repo-path "." \
     --max-commits 5
 ```
 
-**Benefits over script writing:**
+**Benefits over writing scripts from scratch:**
 - **18x better tokens**: 110 vs 2,000
 - **24x faster**: 5 seconds vs 2 minutes
 - **Immutable templates**: No file editing
-- **Reusable workflows**: Same logic, different data
+- **Reusable workflows**: Same logic, different parameters
 
 **What's included:**
-- Framework pattern and template (CLI-based, immutable)
-- 2 generic examples (simple_fetch.py, multi_tool_pipeline.py)
+- 2 generic template scripts (simple_fetch.py, multi_tool_pipeline.py)
+- Complete pattern documentation
 
 ### 2. Multi-Transport Support (NEW)
 
@@ -124,36 +161,60 @@ uv run python -m runtime.harness workspace/script.py --sandbox
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Installation
 
-### Prerequisites
+### System Requirements
 
-- **[Claude Code](https://docs.claude.com/en/docs/claude-code)** (recommended for Skills framework support)
-- Python 3.11+ (3.14 not recommended due to anyio compatibility)
-- [uv](https://github.com/astral-sh/uv) package manager
-- (Optional) Docker or Podman for sandboxing
+- **Python 3.11 or 3.12** (3.14 not recommended due to anyio compatibility issues)
+- **[uv](https://github.com/astral-sh/uv)** package manager (v0.5.0+)
+- **[Claude Code](https://docs.claude.com/en/docs/claude-code)** (optional, for Skills auto-discovery)
+- **Git** (for cloning repository)
+- **Docker or Podman** (optional, for sandbox mode)
 
-**Note:** Skills framework (99.6% reduction) requires Claude Code. Core runtime (98.7% reduction) works with any AI agent.
+### Step 1: Install uv
 
-### Installation
+If you don't have uv installed:
+
+```bash
+# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Windows (PowerShell)
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+# Verify installation
+uv --version
+```
+
+### Step 2: Clone and Install
 
 ```bash
 # Clone repository
 git clone https://github.com/yourusername/mcp-code-execution-enhanced.git
 cd mcp-code-execution-enhanced
 
-# Install dependencies
+# Install dependencies (creates .venv automatically)
 uv sync
 
 # Verify installation
-uv run python -c "from runtime.mcp_client import get_mcp_client_manager; print('✓ Ready')"
+uv run python -c "from runtime.mcp_client import get_mcp_client_manager; print('✓ Installation successful')"
 ```
 
-### Configuration
+### Step 3: Configure MCP Servers
 
-> **Important for Claude Code Users:** This project uses its own `mcp_config.json` for MCP server configuration, separate from Claude Code's global configuration (`~/.claude.json`). To avoid conflicts, you may want to disable MCP servers in Claude Code's configuration while using this project, or ensure they don't overlap.
+> **Important for Claude Code Users:** This project uses its own `mcp_config.json` for MCP server configuration, **separate** from Claude Code's global configuration (`~/.claude.json`). To avoid conflicts, use different servers in each configuration or disable overlapping servers in `~/.claude.json` while using this project.
 
-Create `mcp_config.json` in the project root with your MCP servers:
+**Create `mcp_config.json` in the project root:**
+
+```bash
+# Copy example config
+cp mcp_config.example.json mcp_config.json
+
+# Edit with your servers and API keys
+# Example servers shown below
+```
+
+**Basic configuration example:**
 
 ```json
 {
@@ -170,45 +231,82 @@ Create `mcp_config.json` in the project root with your MCP servers:
     }
   },
   "sandbox": {
-    "enabled": false,
-    "runtime": "auto",
-    "image": "python:3.11-slim"
+    "enabled": false
   }
 }
 ```
 
-### Generate Tool Wrappers
+**See `mcp_config.example.json` for more transport types (stdio, SSE, HTTP).**
+
+### Step 4: Generate Tool Wrappers
 
 ```bash
-# Auto-generate Python wrappers from your MCP servers
+# Auto-generate typed Python wrappers from your MCP servers
 uv run mcp-generate
 
-# This creates typed wrappers in ./servers/
+# This creates ./servers/<server_name>/<tool>.py files
+# Example: servers/git/git_log.py, servers/fetch/fetch.py
 ```
+
+### Step 5: Test the Installation
+
+```bash
+# Test with a simple script
+uv run python -m runtime.harness scripts/simple_fetch.py --url "https://example.com"
+
+# If you configured a git server, test the pipeline
+uv run python -m runtime.harness scripts/multi_tool_pipeline.py --repo-path "." --max-commits 5
+```
+
+### Step 6 (Optional): Setup Sandbox Mode
+
+If you want to use container sandboxing:
+
+```bash
+# Install Podman (recommended, rootless)
+sudo apt-get install -y podman  # Ubuntu/Debian
+brew install podman             # macOS
+
+# OR install Docker
+curl -fsSL https://get.docker.com | sh
+
+# Verify
+podman --version  # or docker --version
+
+# Test sandbox mode
+uv run python -m runtime.harness scripts/simple_fetch.py --url "https://example.com" --sandbox
+```
+
+### Step 7 (Optional): Claude Code Skills Setup
+
+If using Claude Code, the Skills are already configured in `.claude/skills/` and will be auto-discovered. No additional setup needed!
+
+**To use:**
+- Claude Code will automatically find Skills in `.claude/skills/`
+- Just ask Claude to use them naturally
+- Example: "Fetch https://example.com" → Claude discovers and uses simple-fetch Skill
 
 ---
 
 ## 📖 How It Works
 
-### PREFERRED: Skills-Based Execution (99.6% reduction)
+### PREFERRED: Scripts with CLI Args (99.6% reduction)
 
 For multi-step workflows (research, data processing, synthesis):
 
-1. **Discover skills**: `ls ./skills/` → see available skill templates and examples
-2. **Read documentation**: `cat ./skills/simple_fetch.py` → see CLI args and pattern
+1. **Discover scripts**: `ls ./scripts/` → see available script templates
+2. **Read documentation**: `cat ./scripts/simple_fetch.py` → see CLI args and pattern
 3. **Execute with parameters**:
    ```bash
-   uv run python -m runtime.harness skills/simple_fetch.py \
+   uv run python -m runtime.harness scripts/simple_fetch.py \
        --url "https://example.com"
    ```
 
-**Example Skills (Framework Demonstrations):**
-
-**Generic examples** (`skills/`):
+**Generic template scripts** (`scripts/`):
 - `simple_fetch.py` - Basic single-tool execution pattern
 - `multi_tool_pipeline.py` - Multi-tool chaining pattern
 
-**Note:** Skills is a **framework** - use these examples as templates to create workflows for your specific MCP servers and use cases.
+**Note:** These are **templates** - use them as examples to create workflows for your specific MCP servers and use cases.
 
 ### ALTERNATIVE: Direct Script Writing (98.7% reduction)
 
@@ -246,11 +344,11 @@ if __name__ == "__main__":
 Agent → MCP Server → [Full Tool Schemas 27,300 tokens] → Agent
 ```
 
-**Skills-Based** (99.6% Reduction - PREFERRED):
+**Scripts with CLI Args** (99.6% Reduction - PREFERRED):
 ```
-Agent → Discovers skills → Reads skill docs → Executes with CLI args
-Skill → Multi-server orchestration → Returns results
-Tokens: ~110 (skill discovery + documentation)
+Agent → Discovers scripts → Reads script docs → Executes with CLI args
+Script → Multi-server orchestration → Returns results
+Tokens: ~110 (script discovery + documentation)
 Time: ~5 seconds
 ```
 
@@ -269,22 +367,22 @@ Time: ~2 minutes
 - **`runtime/harness.py`**: Dual-mode script execution (direct/sandbox)
 - **`runtime/generate_wrappers.py`**: Auto-generate typed wrappers from MCP schemas
 - **`runtime/sandbox/`**: Container sandboxing with security controls
-- **`skills/`**: Skills framework with 2 generic examples (CLI-based template pattern)
+- **`scripts/`**: CLI-based workflow templates with 2 generic examples
 
 ---
 
-## 🎓 Skills System
+## 🎓 Scripts System
 
 ### Philosophy
 
 **DON'T:** Write scripts from scratch each time
-**DO:** Use pre-written skills with CLI arguments
+**DO:** Use pre-written scripts with CLI arguments
 
-### Creating Custom Skills
+### Creating Custom Scripts
 
 ```python
 """
-SKILL: Your Skill Name
+SCRIPT: Your Script Name
 
 DESCRIPTION: What it does
 
@@ -293,7 +391,7 @@ CLI ARGUMENTS:
     --limit    Max results (default: 10)
 
 USAGE:
-    uv run python -m runtime.harness skills/your_skill.py \
+    uv run python -m runtime.harness scripts/your_script.py \
         --query "your question" \
         --limit 5
 """
@@ -320,7 +418,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-See `skills/README.md` for complete documentation.
+See `scripts/README.md` for complete documentation.
 
 ---
 
@@ -410,8 +508,8 @@ uv run pytest --cov=src/runtime
 - **`README.md`** (this file) - Overview and quick start
 - **`CLAUDE.md`** - Quick reference for Claude Code
 - **`AGENTS.md.template`** - Template for adapting to other AI frameworks
-- **`skills/README.md`** - Skills system guide
-- **`skills/SKILLS.md`** - Complete skills documentation
+- **`scripts/README.md`** - Scripts system guide
+- **`scripts/SKILLS.md`** - Complete scripts documentation
 - **`docs/USAGE.md`** - Comprehensive user guide
 - **`docs/ARCHITECTURE.md`** - Technical architecture
 - **`docs/CONFIGURATION.md`** - MCP server configuration management (Claude Code vs project)
@@ -461,10 +559,10 @@ uv run mcp-exec workspace/script.py --sandbox
 | Approach | Tokens | Time | Use Case |
 |----------|--------|------|----------|
 | **Traditional** | 27,300 | N/A | All tool schemas loaded upfront |
-| **Skills (NEW)** | 110 | 5 sec | Multi-step workflows (PREFERRED) |
+| **Scripts with CLI Args** | 110 | 5 sec | Multi-step workflows (PREFERRED) |
 | **Script Writing** | 2,000 | 2 min | Novel workflows (ALTERNATIVE) |
 
-**Skills achieve 99.6% reduction** - exceeding Anthropic's 98.7% target!
+**Scripts with CLI args achieve 99.6% reduction** - exceeding Anthropic's 98.7% target!
 
 ---
 
@@ -484,7 +582,7 @@ uv run mcp-exec workspace/script.py --sandbox
 - ✅ Production deployment patterns
 
 **Enhanced in this project:**
-- ⭐ **Skills system**: CLI-based immutable templates (99.6% reduction)
+- ⭐ **CLI-based scripts**: CLI-based immutable templates (99.6% reduction)
 - ⭐ **Multi-transport**: stdio + SSE + HTTP support (100% server coverage)
 - ⭐ **Dual-mode execution**: Direct (fast) + Sandbox (secure)
 - ⭐ **Python 3.11 stable**: Avoiding 3.14 anyio compatibility issues
@@ -493,8 +591,8 @@ uv run mcp-exec workspace/script.py --sandbox
 
 ### Architecture Innovations
 
-**Skills vs Scripts:**
-- Skills are **immutable templates** executed with CLI arguments
+**Scripts with CLI Arguments:**
+- Scripts are **immutable templates** executed with CLI arguments
 - No file editing required (parameters via `--query`, `--num-urls`, etc.)
 - Reusable across different queries and contexts
 - Pre-tested and documented workflows
@@ -577,7 +675,7 @@ uv run mcp-exec workspace/script.py --sandbox
 - 🛠️ **Field Normalization**: Handles inconsistent API casing
 
 ### Enhanced Features
-- 🎯 **Skills Framework**: Pattern for CLI-based reusable workflows
+- 🎯 **Scripts Pattern**: Pattern for CLI-based reusable workflows
 - 🔌 **Multi-Transport**: stdio, SSE, and HTTP support
 - 🔐 **Container Sandboxing**: Optional rootless isolation
 - 🧪 **Comprehensive Testing**: 129 tests with full coverage
@@ -593,7 +691,7 @@ See the `examples/` directory for:
 - `example_sandbox_usage.py` - Container sandboxing demo
 - `example_sandbox_simple.py` - Basic sandbox usage
 
-See the `skills/` directory for production-ready workflows.
+See the `scripts/` directory for production-ready workflows.
 
 ---
 
@@ -614,8 +712,8 @@ See the `skills/` directory for production-ready workflows.
 
 **Import errors in skills**
 - Skills must be run via harness (sets PYTHONPATH)
-- Don't run skills directly: `python skills/skill.py` ❌
-- Correct: `uv run python -m runtime.harness skills/skill.py` ✅
+- Don't run skills directly: `python scripts/script.py` ❌
+- Correct: `uv run python -m runtime.harness scripts/script.py` ✅
 
 ### Python Version Issues
 
@@ -684,7 +782,7 @@ MIT License - see LICENSE file for details
 | **Type Safety** | ✅ Pydantic | ⚠️ Basic | ✅ Enhanced |
 | **Sandboxing** | ❌ None | ✅ Required | ✅ Optional |
 | **Multi-Transport** | ❌ stdio only | ❌ stdio only | ✅ stdio/SSE/HTTP |
-| **Skills Framework** | ❌ None | ❌ None | ✅ Yes + examples |
+| **Scripts Pattern** | ❌ None | ❌ None | ✅ Yes + examples |
 | **CLI Execution** | ❌ None | ❌ None | ✅ Immutable |
 | **Test Coverage** | ⚠️ Partial | ⚠️ Partial | ✅ Comprehensive |
 | **Python 3.11** | ✅ Yes | ⚠️ 3.12+ | ✅ Stable |
@@ -717,9 +815,9 @@ MIT License - see LICENSE file for details
 - [ ] Run `uv sync`
 - [ ] Create `mcp_config.json` with your MCP servers
 - [ ] Run `uv run mcp-generate` to create wrappers
-- [ ] Try a skill: `uv run python -m runtime.harness skills/simple_fetch.py --url "https://example.com"`
+- [ ] Try a skill: `uv run python -m runtime.harness scripts/simple_fetch.py --url "https://example.com"`
 - [ ] Read `AGENTS.md` for operational guide
-- [ ] Explore `skills/` for available workflows
+- [ ] Explore `scripts/` for available workflows
 - [ ] Review `docs/` for detailed documentation
 
 ---
@@ -730,13 +828,13 @@ MIT License - see LICENSE file for details
 A: Skills achieve 99.6% token reduction vs 98.7% for scripts, and execute 24x faster (5 sec vs 2 min). They're pre-tested, documented, and immutable.
 
 **Q: Can I use this without Claude Code?**
-A: Yes, but with limitations. The core runtime (script writing, 98.7% reduction) works with any AI agent. The Skills framework (99.6% reduction) is optimized for Claude Code's operational intelligence.
+A: Yes, but with limitations. The core runtime (script writing, 98.7% reduction) works with any AI agent. The Scripts with CLI args (99.6% reduction) work for Claude Code's operational intelligence.
 
 **Q: Can I still write custom scripts?**
-A: Yes! Skills are PREFERRED for common workflows (with Claude Code), but custom scripts are fully supported for novel use cases and other AI agents.
+A: Yes! Scripts with CLI args are PREFERRED for common workflows (with Claude Code), but custom scripts are fully supported for novel use cases and other AI agents.
 
 **Q: What's the difference from the original projects?**
-A: We merged the best of both (progressive disclosure + security), added Skills system, multi-transport support, and refined the architecture.
+A: We merged the best of both (progressive disclosure + security), added CLI-based scripts pattern, multi-transport support, and refined the architecture.
 
 **Q: Why Python 3.11 instead of 3.14?**
 A: anyio <4.9.0 has compatibility issues with Python 3.14's asyncio changes. 3.11 is stable and well-tested.
@@ -751,7 +849,7 @@ A: Add them to `mcp_config.json`, run `uv run mcp-generate`, and they're ready t
 
 ## 🎯 Next Steps
 
-1. **Explore Skills**: `ls skills/` and `cat skills/simple_fetch.py`
+1. **Explore scripts**: `ls scripts/` and `cat scripts/simple_fetch.py`
 2. **Try examples**: Run the example skills or create your own
 3. **Read CLAUDE.md**: Quick operational guide (for Claude Code users)
 4. **Review docs/**: Deep dive into architecture

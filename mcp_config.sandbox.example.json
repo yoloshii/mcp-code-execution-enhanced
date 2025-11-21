@@ -1,10 +1,12 @@
 {
   "mcpServers": {
     "git": {
+      "type": "stdio",
       "command": "uvx",
       "args": ["mcp-server-git", "--repository", "."]
     },
     "fetch": {
+      "type": "stdio",
       "command": "uvx",
       "args": ["mcp-server-fetch"]
     }
@@ -14,9 +16,6 @@
     "runtime": "auto",
     "image": "python:3.11-slim",
     "memory_limit": "512m",
-    "cpu_limit": null,
-    "pids_limit": 128,
-    "timeout": 30,
-    "max_timeout": 120
+    "timeout": 30
   }
 }

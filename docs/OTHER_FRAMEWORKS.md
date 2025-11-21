@@ -44,10 +44,10 @@ This project is **optimized for Claude Code** but the core runtime can be used w
 
 ## ⚠️ Skills Framework Limitations
 
-The Skills framework requires these capabilities:
+The Scripts pattern requires these capabilities:
 
 **Claude Code has (99.6% reduction):**
-- ✅ Filesystem discovery (`ls ./skills/`)
+- ✅ Filesystem discovery (`ls ./scripts/`)
 - ✅ CLI argument parsing from docstrings
 - ✅ USAGE section interpretation
 - ✅ Immutable template execution
@@ -101,7 +101,7 @@ Optional: Add --sandbox flag for container isolation.
 
 - README.md - Overview
 - docs/ - Technical guides
-- examples/ - Script examples (ignore examples/skills/)
+- examples/ - Script examples (ignore examples/scripts/)
 ```
 
 ---
@@ -112,7 +112,7 @@ Optional: Add --sandbox flag for container isolation.
 
 You may be able to adapt the Skills pattern:
 
-1. Test if your framework can `ls ./skills/`
+1. Test if your framework can `ls ./scripts/`
 2. Test if it can parse docstrings
 3. Test if it can execute with CLI arguments
 4. If yes, use `CLAUDE.md` as base
@@ -172,7 +172,7 @@ Focus on the core runtime:
 
 | Framework Type | Token Reduction | Approach |
 |----------------|-----------------|----------|
-| **Claude Code** | 99.6% | Skills framework |
+| **Claude Code** | 99.6% | Scripts pattern |
 | **Filesystem-aware** | 95-99% | Adapted Skills or scripts |
 | **Script-capable** | 98.7% | Script writing |
 | **API-only** | 90-95% | Direct tool wrappers |
@@ -201,4 +201,4 @@ If you successfully adapt this for another framework:
 
 ---
 
-**Summary:** Core runtime works everywhere (98.7%). Skills framework optimized for Claude Code (99.6%). Adapt as needed for your framework.
+**Summary:** Core runtime works everywhere (98.7%). Scripts pattern optimized for Claude Code (99.6%). Adapt as needed for your framework.

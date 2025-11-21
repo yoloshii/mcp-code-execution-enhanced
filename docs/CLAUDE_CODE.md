@@ -1,6 +1,6 @@
 # Claude Code Integration
 
-This project is **optimized for Claude Code** with native support for the Skills framework pattern.
+This project is **optimized for Claude Code** with native support for the Scripts pattern pattern.
 
 ---
 
@@ -12,7 +12,7 @@ This project is **optimized for Claude Code** with native support for the Skills
 - Filesystem-based tool discovery
 - Progressive disclosure pattern
 - MCP server integration
-- Skills framework support (as of v2.0.20)
+- Scripts pattern support (as of v2.0.20)
 
 ---
 
@@ -20,11 +20,11 @@ This project is **optimized for Claude Code** with native support for the Skills
 
 ### Skills Framework Integration
 
-The Skills framework in this project is designed for Claude Code's operational intelligence:
+The Scripts pattern in this project is designed for Claude Code's operational intelligence:
 
 **Claude Code understands:**
-1. `ls ./skills/` → Discover available workflows
-2. `cat ./skills/skill.py` → Read CLI arguments from docstring
+1. `ls ./scripts/` → Discover available workflows
+2. `cat ./scripts/skill.py` → Read CLI arguments from docstring
 3. Execute with `--param` arguments → Immutable templates
 4. Parse USAGE sections → Self-documenting
 
@@ -38,7 +38,7 @@ The Skills framework in this project is designed for Claude Code's operational i
 **Claude Code's workflow:**
 ```
 1. Claude explores codebase with filesystem tools
-2. Claude discovers ./skills/ directory
+2. Claude discovers ./scripts/ directory
 3. Claude reads skill documentation
 4. Claude executes skill with CLI arguments
 5. Skill orchestrates MCP tools
@@ -129,7 +129,7 @@ This achieves **99.6% token reduction** through:
 **Option A:** Use separate servers (recommended)
 - Configure different MCP servers in each
 - Claude Code servers for conversation
-- Project servers for skills/scripts
+- Project servers for scripts/scripts
 
 **Option B:** Disable Claude Code servers
 - Comment out or remove servers from `~/.claude.json`
@@ -159,14 +159,14 @@ This achieves **99.6% token reduction** through:
 
 ```
 "Fetch the content from example.com"
-→ Claude discovers skills/
+→ Claude discovers scripts/
 → Reads simple_fetch.py
 → Executes with --url "https://example.com"
 
 "Create a custom skill for analyzing git repositories"
-→ Claude reads skills/SKILLS.md
+→ Claude reads scripts/SKILLS.md
 → Creates new skill following template
-→ Saves to skills/
+→ Saves to scripts/
 
 "Run the multi tool pipeline skill on this repo"
 → Claude reads multi_tool_pipeline.py
@@ -185,13 +185,13 @@ This achieves **99.6% token reduction** through:
 1. **Discovery Phase:**
    ```
    User: "I need to research X"
-   Claude: Uses `ls ./skills/` to discover available workflows
+   Claude: Uses `ls ./scripts/` to discover available workflows
    Claude: Finds skills matching the need
    ```
 
 2. **Understanding Phase:**
    ```
-   Claude: Uses `cat ./skills/skill.py` to read documentation
+   Claude: Uses `cat ./scripts/skill.py` to read documentation
    Claude: Parses DESCRIPTION, CLI ARGUMENTS, USAGE sections
    Claude: Understands what the skill does and how to execute it
    ```
@@ -199,7 +199,7 @@ This achieves **99.6% token reduction** through:
 3. **Execution Phase:**
    ```
    Claude: Executes with CLI arguments
-   Command: uv run python -m runtime.harness skills/skill.py --param "value"
+   Command: uv run python -m runtime.harness scripts/skill.py --param "value"
    Skill: Orchestrates multiple MCP tools
    Results: Returned to Claude for processing
    ```
@@ -223,7 +223,7 @@ This achieves **99.6% token reduction** through:
 - Write script: ~1,500 tokens
 - Total: ~2,000 tokens
 
-**Skills framework (99.6% reduction - Claude Code):**
+**Scripts pattern (99.6% reduction - Claude Code):**
 - Discover skills: ~50 tokens
 - Read skill docs: ~60 tokens
 - Execute command: ~0 tokens (just shell)
@@ -248,7 +248,7 @@ CLI ARGUMENTS:
     --param1    Description (Claude parses this)
 
 USAGE:
-    uv run python -m runtime.harness skills/your_skill.py \
+    uv run python -m runtime.harness scripts/your_skill.py \
         --param1 "value"
     (Claude executes this pattern)
 """
@@ -259,15 +259,15 @@ USAGE:
 No file editing - Claude passes arguments:
 ```bash
 # Claude doesn't edit the file, just executes:
-uv run python -m runtime.harness skills/skill.py --query "user's query"
+uv run python -m runtime.harness scripts/skill.py --query "user's query"
 ```
 
 **3. Filesystem Discoverable**
 
 Claude uses standard filesystem tools:
 ```bash
-ls ./skills/           # Discovery
-cat skills/skill.py    # Understanding
+ls ./scripts/           # Discovery
+cat scripts/skill.py    # Understanding
 # Execution via harness
 ```
 
@@ -326,8 +326,8 @@ If using with other AI agents:
 
 ### For Claude Code Users
 
-✅ **Recommended:** Use Skills framework for maximum efficiency (99.6%)
-- Discover skills with `ls ./skills/`
+✅ **Recommended:** Use Scripts pattern for maximum efficiency (99.6%)
+- Discover skills with `ls ./scripts/`
 - Execute with CLI arguments
 - Create custom skills for your workflows
 
@@ -336,7 +336,7 @@ If using with other AI agents:
 ⚠️ **Alternative:** Use script writing approach (98.7%)
 - Explore `./servers/` for tools
 - Write custom scripts
-- May not benefit from Skills framework
+- May not benefit from Scripts pattern
 
 ### For Framework Developers
 
@@ -369,7 +369,7 @@ We welcome feedback on:
 ## 🎉 Summary
 
 **Claude Code Integration:**
-- ✅ Skills framework optimized for Claude Code
+- ✅ Scripts pattern optimized for Claude Code
 - ✅ Core runtime works with any agent
 - ✅ Documentation clarifies compatibility
 - ✅ Best practices for Claude Code users

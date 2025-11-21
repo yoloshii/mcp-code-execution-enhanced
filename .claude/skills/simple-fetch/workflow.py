@@ -1,0 +1,1 @@
+../../scripts/simple_fetch.py
