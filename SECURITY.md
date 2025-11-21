@@ -426,18 +426,6 @@ podman image inspect python:3.11-slim
    - Strengthen security policy
    - Consider additional monitoring
 
-### Reporting Vulnerabilities
-
-If you discover a security vulnerability in this project:
-
-1. **Do NOT** open a public GitHub issue
-2. Email security details to: [project maintainer]
-3. Include:
-   - Description of vulnerability
-   - Steps to reproduce
-   - Potential impact assessment
-   - Suggested fix (if available)
-
 ## References
 
 - [Anthropic: Code Execution with MCP](https://www.anthropic.com/engineering/code-execution-with-mcp)
